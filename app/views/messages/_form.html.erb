@@ -1,0 +1,48 @@
+<%# もらった答え  %> 
+<%# form_for(@message, html: {class: "form-horizontal"}) do |f| %>
+
+<%# あえて省略しないver 動作確認済み %> 
+<%# form_for( @message,{ html: {class:"form-horizontal"} } )do |f| %>
+
+<%# 引数の()も省略ver 動作確認済み %> 
+<%# form_for @message, html: {class:"form-horizontal"} do |f| %>
+
+<%# ここまでするとエラー出た。ハッシュ記号の省略は引数の第一ネストまでしか省略できないようだ  %> 
+<%# form_for @message, html: class:"form-horizontal" do |f| %>
+
+<%= form_for @message, html: {class:"form-horizontal"} do |f| %>
+
+  <%#エラーメッセージの表示箇所 %>
+  <% if @message.errors.present? %>
+    <div class="alert alert-danger">
+      <%= alert %>
+      <ul>
+        <% @message.errors.full_messages.each do |full_message| %>
+          <li>
+            <%= full_message %>
+          </li>
+        <% end %> 
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+      <label for="message_name" class="control-label col-md-2">名前:</label>
+    <div class="col-md-6">
+      <%= f.text_field :name, :class => "form-control" %>
+    </div>
+  </div>  
+
+  <div class="form-group">
+      <label for="message_body" class="control-label col-md-2">内容:</label>
+    <div class="col-md-6">
+      <%# 下のclassの書き方はやっぱりこっちのハッシュの書き方のほうが好き。 %>
+      <%# 名前の方と書き方揃ってたほうが良いんだろうけど学習用にあえて書き方変えておく%>
+      <%= f.text_area :body, class:"form-control" %>
+    </div>
+  </div>  
+
+  <%# 投稿ボタン %>
+  <%= f.submit "投稿する" ,class: "btn btn-sm btn-primary" %>
+
+<% end %>
