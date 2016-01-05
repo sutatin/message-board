@@ -6,6 +6,7 @@
   <div class="panel-body">
     <% @messages.each do |message| %>
       <span class="label label-info"><%= message.name %></span>
+      <span class="label label-default"><%= message.age %>歳</span>
       <%= message.body %>
       (<%= link_to "edit" , edit_message_path(message) %>)
       <%# この下の表記がよくわからない。書ける気がしない %>
